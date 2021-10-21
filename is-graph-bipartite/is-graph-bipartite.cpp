@@ -11,7 +11,7 @@ bool isGraphBipartite(vector<vector<int>> &adjList, vector<int> &colors, int nod
 			return false;
 
 		if(colors[u] == -1 and !isGraphBipartite(adjList, colors, u, !color))
-			return false;
+			return false; //Ulta colour krkr false wali condition
 	}
 
 	return true;
