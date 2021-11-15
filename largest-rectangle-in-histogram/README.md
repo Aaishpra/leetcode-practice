@@ -1,3 +1,4 @@
+[Discussion Post (created on 15/10/2021 at 8:44)](https://leetcode.com/problems/largest-rectangle-in-histogram/discuss/1578844/NSL-AND-NSR-ARRAY-FOR-FINDING-WIDTH-oror-Stack-implementation)  
 <h2>84. Largest Rectangle in Histogram</h2><h3>Hard</h3><hr><div><p>Given an array of integers <code>heights</code> representing the histogram's bar height where the width of each bar is <code>1</code>, return <em>the area of the largest rectangle in the histogram</em>.</p>
 
 <p>&nbsp;</p>
