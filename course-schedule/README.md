@@ -1,3 +1,4 @@
+[Discussion Post (created on 20/10/2021 at 15:52)](https://leetcode.com/problems/course-schedule/discuss/1587926/CPP-Solution-oror-Use-Kahn's-Algorithm)  
 <h2>207. Course Schedule</h2><h3>Medium</h3><hr><div><p>There are a total of <code>numCourses</code> courses you have to take, labeled from <code>0</code> to <code>numCourses - 1</code>. You are given an array <code>prerequisites</code> where <code>prerequisites[i] = [a<sub>i</sub>, b<sub>i</sub>]</code> indicates that you <strong>must</strong> take course <code>b<sub>i</sub></code> first if you want to take course <code>a<sub>i</sub></code>.</p>
 
 <ul>
