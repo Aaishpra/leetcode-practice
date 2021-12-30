@@ -1,27 +1,42 @@
 class Solution {
 public:
-    string removeKdigits(string num, int k) {
-        if (num.length() == k) return "0";
-
-    string ans;
-    vector<char> stack;
-
-    for (int i = 0; i < num.length(); ++i) {
-      while (k > 0 && !stack.empty() && stack.back() > num[i]) {
-        stack.pop_back();
-        --k;
-      }
-      stack.push_back(num[i]);
-    }
-
-    while (k-- > 0)
-      stack.pop_back();
-
-    for (const char c : stack) {
-      if (c == '0' && ans.empty()) continue;
-      ans += c;
-    }
-
-    return ans.empty() ? "0" : ans;
+    string removeKdigits(string str, int k) {
+        if(str.length() <= k)
+            return "0";
+        if(k == 0)
+            return str;
+        
+        stack <char> s;
+        
+        //s.push(str[0]);
+        
+        for(int i = 0; i<str.length(); i++){
+            while(k>0 && !s.empty() && str[i]<s.top()){
+                k--;
+                s.pop();
+            }
+            s.push(str[i]);
+            
+			// We pop any preceeding zeroes
+            if(s.size() == 1 && str[i] == '0')
+                s.pop();
+        }
+        
+		// For cases like "12345" where every str[i] > s.top()
+        while(k && !s.empty()){
+            k--;
+            s.pop();
+        }
+        string res = "";
+        while(!s.empty()){
+            res.push_back(s.top());
+            s.pop();
+        }
+        
+        reverse(res.begin(), res.end());
+        if(res.size() == 0)
+            return "0";
+        else
+        return res;
     }
 };
