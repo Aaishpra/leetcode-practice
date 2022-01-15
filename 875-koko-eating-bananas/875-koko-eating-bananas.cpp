@@ -13,13 +13,13 @@ public:
         for(int i=0;i<piles.size();i++){
             mx=max(mx,piles[i]);
         }
-        
+        int res=0;
         int lo=1,hi=mx;
         while(lo<=hi){
             int mid=lo+(hi-lo)/2;
-            if(isValid(piles,h,mid)==true) hi=mid-1;
+            if(isValid(piles,h,mid)==true)res=mid, hi=mid-1;
             else lo=mid+1;
         }
-        return lo;
+        return res;
     }
 };
