@@ -1,43 +1,25 @@
 class Solution {
-int hoursRequired(const vector<int> &piles, int k)
-    {
-        int h = 0;
-        if(k == 0) return INT_MAX;
-        for(int i : piles)
-        {
-            if(i % k != 0)
-            {
-                h++;
-            }
-            h += (i / k);
+    int isValid(vector<int>& arr,int h,int mid){
+        int curh=0;
+        for(int i=0;i<arr.size();i++){
+            curh+=arr[i]/mid;
+            if(arr[i]%mid!=0) curh++;
         }
-        return h;
+        return curh<=h;
     }
-    
 public:
-    int minEatingSpeed(vector<int>& piles, int H) {
-        long long sum = 0;
-        int mx = 0;
-        for(int i = 0; i < piles.size(); i++)
-        {
-            sum += piles[i];
-            mx = max(mx, piles[i]);
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int mx=INT_MIN;
+        for(int i=0;i<piles.size();i++){
+            mx=max(mx,piles[i]);
         }
-        int l = sum / H, r = mx, ans;
-        while(l < r)
-        {
-            int mid = l + (r - l) / 2;
-            int ans = hoursRequired(piles, mid);
-			// If hours required is greater than our limit, ignore mid
-            if(ans > H)
-            {
-                l = mid + 1;
-            }
-            else
-            {
-                r = mid;
-            }
+        
+        int lo=1,hi=mx;
+        while(lo<=hi){
+            int mid=lo+(hi-lo)/2;
+            if(isValid(piles,h,mid)==true) hi=mid-1;
+            else lo=mid+1;
         }
-        return r;
+        return lo;
     }
 };
