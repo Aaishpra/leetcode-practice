@@ -9,7 +9,7 @@ public:
     int findKthNumber(int m, int n, int k) {
         int L = 1, R = m*n, mid, ans;
         while(L <= R) {
-            mid = (L + R) >> 1;
+            mid = L+(R-L)/2;
             if(count(m, n, mid) < k) 
                 L = mid + 1;
             else
