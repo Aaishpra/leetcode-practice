@@ -17,7 +17,8 @@ public:
         int lo=1,hi=mx;
         while(lo<=hi){
             int mid=lo+(hi-lo)/2;
-            if(isValid(piles,h,mid)==true)res=mid, hi=mid-1;
+            if(isValid(piles,h,mid)==true)
+                res=mid, hi=mid-1;
             else lo=mid+1;
         }
         return res;
