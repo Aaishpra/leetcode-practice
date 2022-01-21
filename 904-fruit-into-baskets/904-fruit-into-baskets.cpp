@@ -5,7 +5,7 @@ public:
         int i=0;
         int j=0;
         int mx=0;
-        if (s.size()==0 or s.size()==1 or s.size()==2) return s.size();
+        //if (s.size()==0 or s.size()==1 or s.size()==2) return s.size();
         while(j<s.size())
         {
             mp[s[j]]++;
