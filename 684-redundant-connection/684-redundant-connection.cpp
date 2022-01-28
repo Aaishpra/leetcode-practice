@@ -1,28 +1,28 @@
+class DSU {
+    vector<int> par, rank;
+public:
+    DSU(int n) : par(n), rank(n) {
+        iota(begin(par), end(par), 0);
+    }
+    int find(int x) {
+        if(x == par[x]) return x;                       // x is itself the parent of this component
+        return par[x] = find(par[x]);                   // update parent of x before returning for each call
+    }
+    bool Union(int x, int y) {
+        int xp = find(x), yp = find(y);                 // find parents of x and y, i.e, representatives of components that x and y belong to
+        if(xp == yp) return false;                      // x and y already belong to same component - not possible to union
+        if(rank[xp] > rank[yp]) par[yp] = par[xp];      // union by rank - join smaller ranked to bigger one
+        else if(rank[yp] > rank[xp]) par[xp] = par[yp];
+        else par[xp] = yp, rank[yp]++;                  // same rank - join either to other and increment rank of final parent
+        return true;
+    }
+};
 class Solution {
 public:
-    bool dfs(vector<vector<int>>& graph,vector<int> &vis,int node,int par=-1){
-        vis[node]=1;
-        for(int child: graph[node]){
-            if(vis[child]==0){
-                if(dfs(graph,vis,child,node)==true)
-                    return true;
-            }
-            else if(child!=par)
-                return true;
-        }
-        return false;
-    }
-    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
-        int n=edges.size();
-        vector<vector<int>> graph(n+1);
-        vector<int> vis(n+1,0);
-        
-        for(auto& e:edges){
-            fill(vis.begin(),vis.end(),0);
-            graph[e[0]].push_back(e[1]);
-            graph[e[1]].push_back(e[0]);
-            if(dfs(graph,vis,e[0])) return e;
-        }
-        return {};
+    vector<int> findRedundantConnection(vector<vector<int>>& e) {
+        DSU ds(size(e) + 1);
+        for(auto& E : e) 
+            if(!ds.Union(E[0], E[1])) return E;	// not possible to union - adding this edge was causing the cycle
+        return { };    // un-reachable
     }
 };
