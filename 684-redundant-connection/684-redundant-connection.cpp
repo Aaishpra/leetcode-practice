@@ -1,28 +1,56 @@
-class DSU {
-    vector<int> par, rank;
+class UnionFind {
 public:
-    DSU(int n) : par(n), rank(n) {
-        iota(begin(par), end(par), 0);
+    UnionFind(int sz) : root(sz), rank(sz) {
+        for (int i = 0; i < sz; i++) {
+            root[i] = i;
+            rank[i] = 1;
+        }
     }
+
     int find(int x) {
-        if(x == par[x]) return x;                       // x is itself the parent of this component
-        return par[x] = find(par[x]);                   // update parent of x before returning for each call
+        if (x == root[x]) {
+            return x;
+        }
+        return root[x] = find(root[x]);
     }
-    bool Union(int x, int y) {
-        int xp = find(x), yp = find(y);                 // find parents of x and y, i.e, representatives of components that x and y belong to
-        if(xp == yp) return false;                      // x and y already belong to same component - not possible to union
-        if(rank[xp] > rank[yp]) par[yp] = par[xp];      // union by rank - join smaller ranked to bigger one
-        else if(rank[yp] > rank[xp]) par[xp] = par[yp];
-        else par[xp] = yp, rank[yp]++;                  // same rank - join either to other and increment rank of final parent
-        return true;
+
+    bool unionSet(int x, int y) {
+        int rootX = find(x);
+        int rootY = find(y);
+        if (rootX != rootY) {
+            if (rank[rootX] > rank[rootY]) {
+                root[rootY] = rootX;
+            } else if (rank[rootX] < rank[rootY]) {
+                root[rootX] = rootY;
+            } else {
+                root[rootY] = rootX;
+                rank[rootX] += 1;
+            }
+            return true;
+        }
+        return false;
     }
+
+    bool connected(int x, int y) {
+        return find(x) == find(y);
+    }
+
+private:
+    vector<int> root;
+    vector<int> rank;
 };
+
+
+
+
 class Solution {
 public:
-    vector<int> findRedundantConnection(vector<vector<int>>& e) {
-        DSU ds(size(e) + 1);
-        for(auto& E : e) 
-            if(!ds.Union(E[0], E[1])) return E;	// not possible to union - adding this edge was causing the cycle
-        return { };    // un-reachable
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+     int n=edges.size();
+      UnionFind uf(n+1);
+        for(auto e:edges){
+            if(!uf.unionSet(e[0],e[1]))return e;
+        }
+        return {};
     }
 };
