@@ -1,39 +1,29 @@
 class Solution {
 public:
-     int findCircleNum(vector<vector<int>>& isConnected) {
-         int n=isConnected[0].size();
-        bool visited[n+1];
-        for(int i=0;i<n;i++)
-        {
-            visited[i]=false;
-        }
-        return dfs(isConnected,visited,n);
-    }
-    void dfsR(int s,vector<vector<int>>& isConnected,bool visited[],int n)
-    {
-        visited[s]=true;
-        for(int it=0;it<n;it++)
-        {
-            if(isConnected[s][it]==1)
-            {
-            if(visited[it]==false)
-            dfsR(it,isConnected,visited,n);
+    void dfs(vector<vector<int>>& grid,vector<int> &vis,int node){
+        vis[node]=1;
+        for(int i=0;i<grid.size();i++){
+           // if(i==node)continue;
+             if(vis[i]==0 and grid[node][i]){
+                dfs(grid,vis,i);
             }
         }
     }
-    int dfs(vector<vector<int>>& isConnected,bool visited[],int n)
-    {
+    int findCircleNum(vector<vector<int>>& grid) {
+        int n=grid.size();
+        vector<int> vis(n,0);
+        
         int count=0;
-        for(int i=0;i<n;i++)
-        {
-            if(visited[i]==false)
+        
+        for(int i=0;i<n;i++){
             {
-                count++;
-                visited[i]=true;
-                dfsR(i,isConnected,visited,n);
+                if(vis[i]==0){
+                    vis[i]=1;
+                    dfs(grid,vis,i);
+                    count++;
+                }
             }
         }
         return count;
     }
-    
 };
