@@ -28,7 +28,7 @@ public:
         for(int i=0;i<lists.size();i++){
             if(lists[i]!=NULL) q.push(lists[i]);}
             while(q.size()){
-                ListNode *temp=q.top();
+                               ListNode *temp=q.top();
                 tail->next=temp;
                 tail=temp;
                 q.pop();
