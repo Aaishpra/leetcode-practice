@@ -2,12 +2,10 @@ class Solution {
 public:
     vector<int> sortArrayByParityII(vector<int>& nums) {
         int n=nums.size();
-        int i=0,j=n-1;
-        while(i<n){
-            while(i<n and nums[i]%2==0) i+=2;
-            if(i==n)break;
-            while(j>=0 and nums[j]%2==1)j-=2;
-            swap(nums[i],nums[j]);
+        for(int i=0,j=1;i<n;){
+            if(nums[i]%2==0)i+=2;
+            else if(nums[j]%2!=0) j+=2;
+            else swap(nums[i],nums[j]);
         }
         return nums;
     }
