@@ -4,7 +4,7 @@ public:
         int n=arr.size();
         vector<int> odd,even;
         for(int i=0;i<arr.size();i++){
-            if(i%2)even.push_back(arr[i]);
+            if(i%2==1)even.push_back(arr[i]);
             else odd.push_back(arr[i]);
         }
         sort(odd.begin(),odd.end());
