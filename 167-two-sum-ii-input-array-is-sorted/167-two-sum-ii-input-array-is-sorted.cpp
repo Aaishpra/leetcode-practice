@@ -8,8 +8,8 @@ public:
             if(nums[lo]+nums[hi]==target) {
                 res.push_back(lo+1);
                 res.push_back(hi+1);
-                while(lo+1<hi and nums[lo]==nums[lo+1])lo++;
-                while(lo<hi-1 and nums[hi]==nums[hi-1])hi--;
+                // while(lo+1<hi and nums[lo]==nums[lo+1])lo++;
+                // while(lo<hi-1 and nums[hi]==nums[hi-1])hi--;
                 lo++,hi--;
             }
             else if(nums[lo]+nums[hi]<target) lo++;
