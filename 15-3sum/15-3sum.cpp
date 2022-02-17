@@ -1,8 +1,7 @@
 class Solution {
 public:
-    //a+b+c=0 thats why c=-(a+b);
     vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> res;
+      vector<vector<int>> res;
         sort(nums.begin(),nums.end());
         int n=nums.size();
         for(int i=0;i<n-2;i++){
