@@ -30,15 +30,17 @@ public:
         
         while(l<=h) {  //Finding pivot element
             int m = l+(h-l)/2;
-            if(nums[m]<nums[(m+1)%s] && nums[m]<nums[(m-1+s)%s]) {
+            int next=(m+1)%s;
+            int prev=(m-1+s)%s;
+            if(nums[m]<nums[next] && nums[m]<nums[prev]) {
                 pivot = m;
                 break;
             }
             else if(nums[m]>=nums[0] && nums[m]>=nums[s-1])
-                l = (m+1)%s;
+                l = next;
                
             else
-                 h = (m-1+s)%s;
+                 h = prev;
                 
         }
         if(target >= nums[pivot] && target <= nums[s-1])
