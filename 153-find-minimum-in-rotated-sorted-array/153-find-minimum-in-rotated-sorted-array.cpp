@@ -1,16 +1,20 @@
 class Solution {
 public:
-    int findMin(vector<int>& A) {
-        int n=A.size();
-        int lo=0,hi=n-1;
-        // find the index of the smallest value using binary search.
-        // Loop will terminate since mid < hi, and lo or hi will shrink by at least 1.
-        // Proof by contradiction that mid < hi: if mid==hi, then lo==hi and loop would have been terminated.
-        while(lo<hi){
-            int mid=(lo+hi)/2;
-            if(A[mid]>A[hi]) lo=mid+1;
-            else hi=mid;
+    int findMin(vector<int>& nums) {
+        int lo=0;
+        int n=nums.size();
+        int hi=nums.size()-1;
+        if(n==1)return nums[0];
+        while(lo<=hi){
+            int mid=lo+(hi-lo)/2;
+            int next=(mid+1)%n;
+            int prev=(mid+n-1)%n;
+            if(nums[mid]<nums[next] and nums[mid]<nums[prev])return nums[mid];
+            else if(nums[mid]>nums[hi]){
+                lo=mid+1;
+            }
+            else hi=mid-1;
         }
-        return A[lo];
+                                   return -1;
     }
 };
