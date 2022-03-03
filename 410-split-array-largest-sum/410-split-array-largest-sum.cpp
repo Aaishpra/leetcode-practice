@@ -1,29 +1,30 @@
 class Solution {
 public:
-    bool IsValid(vector<int>& nums,int m,int mx){
-        int count=1;
+    bool isValid(vector<int> &nums,int m,long mx){
+        int count=0;
         int sum=0;
         for(int i=0;i<nums.size();i++){
             sum+=nums[i];
             if(sum>mx){
-                count++;
-                sum=nums[i];
-            }
+            count++;
+            sum=nums[i];}
         }
-        return count>m?false:true;
+        return count<m;
     }
     int splitArray(vector<int>& nums, int m) {
+        int n=nums.size();
         int mx=INT_MIN,sum=0;
-        for(int i=0;i<nums.size();i++){
-sum+=nums[i];
-        mx=max(mx,nums[i]);
+        for(int i=0;i<n;i++){
+            sum+=nums[i];
+            mx=max(mx,nums[i]);
         }
-        int res=0;
-        int lo=mx,hi=sum;
+        int lo=mx, hi=sum;
+        int res=-1;
         while(lo<=hi){
-            int mid=lo+(hi-lo)/2;
-            if(IsValid(nums,m,mid)==true){
-                res=mid;hi=mid-1;
+        long mid=lo+(hi-lo)/2;
+            if(isValid(nums,m,mid)){
+                res=mid;
+                hi=mid-1;
             }
             else lo=mid+1;
         }
