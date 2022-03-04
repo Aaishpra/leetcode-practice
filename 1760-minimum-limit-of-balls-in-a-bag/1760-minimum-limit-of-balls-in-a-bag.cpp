@@ -1,6 +1,6 @@
 class Solution {
 public:
-  int minimumSize(vector<int>& nums, int maxOperations) {
+     int minimumSize(vector<int>& nums, int maxOperations) {
 		int start = 1, end = *max_element(nums.begin(), nums.end());
 		int minPenalty = end;
 		// binary search on possible range
