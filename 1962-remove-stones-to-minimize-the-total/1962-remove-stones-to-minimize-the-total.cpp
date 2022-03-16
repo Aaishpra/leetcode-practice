@@ -3,12 +3,12 @@ public:
     int minStoneSum(vector<int>& piles, int k) {
         priority_queue<int> pq(piles.begin(),piles.end());
         
-        while(k>0){
+       for(int i=0;i<k;i++){
             int tp=pq.top();
             pq.pop();
             tp-=floor(tp/2);
             pq.push(tp);
-            k--;
+           // k--;
         }
         
         int sum=0;
