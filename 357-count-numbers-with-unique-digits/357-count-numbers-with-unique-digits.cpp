@@ -1,24 +1,16 @@
 class Solution {
 public:
-       int permutation(int n, int r)
-    {
-        if(r == 0)
-        {
-            return 1;
-        }else{
-            return n * permutation(n - 1, r - 1);
-        }
-    }
     int countNumbersWithUniqueDigits(int n) {
-        int sum = 1;
-        if(n > 0)
-        {
-           int end = (n > 10)? 10 : n;
-           for(int i = 0; i < end; i++)
-           {
-               sum += 9 * permutation(9, i);
-           }
+        if(n==0) return 1;
+        int ans=10; // for 0 digit = 1 and for 1 digit  unique digits = 9 so total = U(0) + U(1) = 10
+        int start=9;
+        int current=9;
+        
+        while(n-->1 and start){
+            current*=start;
+            start--;
+            ans+=current;
         }
-        return sum;
+        return ans;
     }
 };
