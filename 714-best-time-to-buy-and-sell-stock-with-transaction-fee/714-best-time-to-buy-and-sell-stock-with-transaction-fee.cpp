@@ -1,7 +1,7 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices, int fee) {
-        int n=prices.size();
+     int n=prices.size();
         if(n==1)return 0;
         int dp[n][2];
         dp[0][0]=0;
