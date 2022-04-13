@@ -5,10 +5,9 @@ public:
         map<int,int> mp;
         for(int i=0;i<n;i++){
             mp[nums[i]]++;
+            if(mp[nums[i]]>n/2)return nums[i];
         }
-        for(auto m:mp){
-            if(m.second>n/2)return m.first;
-        }
+
         return 0;
     }
 };
