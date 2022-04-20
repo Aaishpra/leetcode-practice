@@ -17,7 +17,7 @@ class Solution {
                     res.push_back({nums[i],nums[lo],nums[hi],offset});
                     //Lo ar hi k duplicates htane k liye
                     while(lo+1<hi and nums[lo]==nums[lo+1])lo++;
-                    while(lo<hi-1 and nums[hi]==nums[hi-1])hi--;
+                    while(lo+1<hi and nums[hi]==nums[hi-1])hi--;
                     lo++,hi--;
                 }
             }
