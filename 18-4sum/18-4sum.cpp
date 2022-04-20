@@ -1,36 +1,38 @@
 class Solution {
-    public:
-     vector<vector<int>> res;
-      void threeSum(vector<int>& nums,int t,int start,int offset) {
-       
-        sort(nums.begin(),nums.end());
+public:
+    vector<vector<int>> res;
+    void threesum(vector<int>& nums, int target,int start,int offset){
         int n=nums.size();
+        sort(nums.begin(),nums.end());
         for(int i=start;i<n-2;i++){
-            //Duplicates na aajye same number m
-             if(i>start && (nums[i]==nums[i-1]) )continue;
-            int target=t-nums[i];
+            if(i>start and nums[i]==nums[i-1]) continue;
+            int t=target-nums[i];
             int lo=i+1, hi=n-1;
             while(lo<hi){
-                if(nums[lo]+nums[hi]<target) lo++;
-                else if(nums[lo]+nums[hi]>target)hi--;
+                if(nums[lo]+nums[hi]<t)lo++;
+                else if(nums[lo]+nums[hi]>t) hi--;
                 else {
-                    res.push_back({nums[i],nums[lo],nums[hi],offset});
-                    //Lo ar hi k duplicates htane k liye
+                    res.push_back({nums[lo],nums[hi],nums[i],offset});
                     while(lo+1<hi and nums[lo]==nums[lo+1])lo++;
                     while(lo+1<hi and nums[hi]==nums[hi-1])hi--;
-                    lo++,hi--;
+                    lo++;
+                    hi--;
                 }
             }
         }
-       
+     //   return res;
     }
-
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
-        if(nums.size()<4)return {};
+        int n=nums.size();
+        if(n<4)return {};
         sort(nums.begin(),nums.end());
-        for(int i=0;i<nums.size()-3;i++){
+        for(int i=0;i<n-3;i++){
             if(i>0 and nums[i]==nums[i-1])continue;
-            threeSum(nums,target-nums[i],i+1,nums[i]);
+            int t=target-nums[i];
+           
+                threesum(nums,t,i+1,nums[i]);
+                
+            
         }
         return res;
     }
