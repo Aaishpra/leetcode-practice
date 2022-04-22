@@ -1,21 +1,22 @@
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
-        unordered_map<char,int>m;
+       unordered_map<char,int>m;
     for(int i=0;i<p.length();i++)
         m[p[i]]++;
     int count=m.size();
     vector<int>ans;
     int i=0,j=0;
-    int n=s.length()-1;
+    int n=s.length();
     int k=p.length(); //window size
-    while(j<=n)
+    while(j<n)
     {
         if(m.find(s[j])!=m.end()) //if any character in s matches with the p string character
         {
             m[s[j]]--;
             if(m[s[j]]==0)
                 count--;
+            
         }
         if(j-i+1==k) //we might get an ans
         {
@@ -32,6 +33,5 @@ public:
         j++;
     }
     return ans;
-  
     }
 };
