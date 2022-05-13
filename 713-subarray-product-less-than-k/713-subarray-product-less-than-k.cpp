@@ -1,19 +1,26 @@
 class Solution {
 public:
     int numSubarrayProductLessThanK(vector<int>& nums, int k) {
-        int start = 0;
-        long prod = 1;
-        int count =0; // count of subarray prod  less than k
-        for(int end =0; end< nums.size(); end++){
-            prod *= nums[end];
-    
-           while(prod >= k && start < nums.size()){
-               prod = prod/nums[start];// divide product by nums at start pointer t reduce the prod
-                start++;//move start pointer because no longer nums at start can give us prod < k
-              }
-           if(prod < k)
-            count += end - start +1;
-      }
-    return count;
+        int i=0,j=0;
+        int prod=1;
+        int n=nums.size();
+        int cnt=0;
+        while(j<n){
+            prod=prod*nums[j];
+              if(prod>=k && i<n){
+                while(prod>=k && i<n){
+                prod=prod/nums[i];
+                 i++;   
+                }
+            }
+            if(prod<k) {
+                cnt+=j-i+1;
+                
+            }
+          
+            j++;
+        }
+        return cnt;
     }
+    
 };
