@@ -18,7 +18,7 @@ public:
              if(nums[i]==1)count_1++;
         }
         
-        int mx=count_1;           //for storing maximum count of 1s in a window
+        int mx=0;           //for storing maximum count of 1s in a window
         for(int i=windowsize;i<n+windowsize;i++){
             if(nums[i%n]==1)
                 count_1++;
