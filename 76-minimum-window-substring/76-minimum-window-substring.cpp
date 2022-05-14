@@ -31,9 +31,9 @@ int count=mp.size();
                             start=i;
                         } 
                     }
-                    i++;
+                    
                 }
-                else
+                
                     i++;
             }
         }
