@@ -1,10 +1,10 @@
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-    vector<int> ans;
-        list<int> l;
+            list<int> l;
         int i=0;
         int j=0;
+        vector<int> ans;
         
         if (k>nums.size()) // edge case
         {
@@ -32,5 +32,6 @@ public:
             
         }
         return ans;
+     
     }
 };
