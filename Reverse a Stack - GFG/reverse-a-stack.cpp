@@ -10,20 +10,25 @@ using namespace std;
 
 class Solution{
 public:
-    vector<int> Reverse(stack<int> St){
-         if(St.empty()){
-           return {};
-       }
-       
-       vector<int> vec;
-       vec.push_back(St.top());
-       
-       St.pop();
-       
-       vector<int> smallOutput = Reverse(St);
-       
-       vec.insert(vec.end(), smallOutput.begin(), smallOutput.end());
-       return vec;
+    vector<int> Reverse(stack<int> st){
+        //int x;
+        vector<int> ans;
+        if(st.empty()==true){
+            return ans;
+        }
+        int x=st.top();
+        st.pop();
+        
+        Reverse(st);
+        
+        st.push(x);
+        while(!st.empty()){
+            x=st.top();
+            st.pop();
+            ans.push_back(x);
+        }
+        
+        return ans;
     }
 };
 
