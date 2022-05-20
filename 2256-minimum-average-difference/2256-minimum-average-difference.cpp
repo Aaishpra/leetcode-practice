@@ -14,7 +14,7 @@ public:
 	
 	// calculating minimum average for i=0 to i=n-2
     for(int i=1;i<n;i++) {
-        int k=(abs(pre[i-1]/i-(pre[n-1]-pre[i-1])/(n-i)));
+        int k=abs(pre[i-1]/i-(pre[n-1]-pre[i-1])/(n-i));
         if(res>k){
             res=k;
             ind=i-1;
