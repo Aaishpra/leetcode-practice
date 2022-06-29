@@ -1,32 +1,29 @@
 class Solution {
-    private:
-    void dfs(vector<vector<int>>& ar,vector<int>& vis,int node){
+public:
+    void dfs(int node,vector<vector<int>>& ar,vector<int>& vis){
         vis[node]=1;
         for(int child:ar[node]){
             if(vis[child]==0){
-                dfs(ar,vis,child);
+                dfs(child,ar,vis);
             }
         }
     }
-public:
-    int makeConnected(int n, vector<vector<int>>& connections) {
-        int m=connections.size();
-        if(m<n-1) return -1;
-        vector<int> vis(n,0);
+    int makeConnected(int n, vector<vector<int>>& cp) {
         vector<vector<int>> ar(n);
-        
-        for(auto c:connections){
+        vector<int> vis(n,0);
+        int m=cp.size();
+        if(m<n-1)return -1;
+        for(auto c:cp){
             ar[c[0]].push_back(c[1]);
             ar[c[1]].push_back(c[0]);
         }
-        
-        int count=0;
+        int cc=0;
         for(int i=0;i<n;i++){
             if(vis[i]==0){
-                dfs(ar,vis,i);
-                count++;
+                dfs(i,ar,vis);
+                cc++;
             }
         }
-        return count-1;
+        return cc-1;
     }
 };
