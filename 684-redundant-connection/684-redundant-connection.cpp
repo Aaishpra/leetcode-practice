@@ -13,7 +13,7 @@ class UnionFind{
         if(x==root[x]) return x;
         return root[x]=find(root[x]);
     }
-    bool find(int x,int y){
+    bool Union(int x,int y){
         int rootx=find(x);
         int rooty=find(y);
         if(rootx!=rooty){
@@ -41,7 +41,7 @@ public:
         int n=edges.size();
         UnionFind uf(n+1);
         for(auto e:edges){
-            if(uf.find(e[0],e[1])==false) return e;
+            if(uf.Union(e[0],e[1])==false) return e;
         }
         return {};
     }
