@@ -1,32 +1,44 @@
 class Solution {
-bool dfs(vector<vector<int>>& graph, int v, vector<int>& dp) {
-
- 		if (dp[v])
- 			return dp[v] == 1;
-
- 		dp[v] = -1;
-
- 		for (auto it = graph[v].begin(); it != graph[v].end(); it++)
- 			if (!dfs(graph, *it, dp))
- 				return false;
-
- 		dp[v] = 1;
-
- 		return true;
- 	}
- public:
- 	vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-
- 		int V = graph.size();
-
- 		vector<int>res;
- 		vector<int>dp(V, 0);
-
- 		for (int i = 0; i < V; i++) {    
- 			if (dfs(graph, i, dp))
- 				res.push_back(i);
- 		}
-
- 		return res;
- 	}
+public:
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+          int n = graph.size();
+        vector<int> ans;
+        
+        // build adj
+        vector<vector<int>> adj(n);
+        vector<int> outdegree(n);
+        
+        for (int u = 0; u < n; u++) {
+            for (int v : graph[u]) {
+                adj[v].push_back(u);
+                outdegree[u]++;
+            }
+        }
+        
+        // topo sort
+        queue<int> q;
+        
+        for (int i = 0; i < n; i++) {
+            if (outdegree[i] == 0) {
+                q.push(i);
+            }
+        }
+        
+        while(!q.empty()) {
+            auto t = q.front();
+            q.pop();
+            
+            ans.push_back(t);
+            
+            for (int v : adj[t]) {
+                if (--outdegree[v] == 0) {
+                    q.push(v);
+                }
+            }
+        }
+        
+        sort(ans.begin(), ans.end());
+        
+        return ans;
+    }
 };
