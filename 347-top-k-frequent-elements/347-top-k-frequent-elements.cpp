@@ -13,8 +13,7 @@ public:
         }
         vector<int> res;
         while(!min_heap.empty()){
-           
-                res.push_back(min_heap.top().second);
+            res.push_back(min_heap.top().second);
             min_heap.pop();
             }
         
