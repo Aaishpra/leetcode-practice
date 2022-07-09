@@ -5,7 +5,7 @@ vector<bool> visited;
 vector<int> tin, low;
 int timer;
 vector<vector<int>> res;
-void dfs(int v, int p,vector<vector<int>>& adj) {
+void dfs(int v, int p, vector<vector<int>>& adj) {
     visited[v] = true;
     tin[v] = low[v] = timer++;
     for (int to : adj[v]) {
@@ -13,19 +13,17 @@ void dfs(int v, int p,vector<vector<int>>& adj) {
         if (visited[to]) {
             low[v] = min(low[v], tin[to]);
         } else {
-            dfs(to, v,adj);
+            dfs(to, v, adj);
             low[v] = min(low[v], low[to]);
             if (low[to] > tin[v])
-                res.push_back(vector<int>{to,v});
+                res.push_back({to,v});
         }
     }
 }
 
 
-    vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
-    timer = 0;
-       
-    
+vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
+    timer = 0;   
     visited.assign(n, false);
     tin.assign(n, -1);
     low.assign(n, -1);
