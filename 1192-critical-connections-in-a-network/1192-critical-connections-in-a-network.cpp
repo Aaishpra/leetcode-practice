@@ -1,41 +1,39 @@
 class Solution {
 public:
-
-vector<bool> visited;
-vector<int> tin, low;
-int timer;
-vector<vector<int>> res;
-void dfs(int v, int p, vector<vector<int>>& adj) {
-    visited[v] = true;
-    tin[v] = low[v] = timer++;
-    for (int to : adj[v]) {
-        if (to == p) continue;
-        if (visited[to]) {
-            low[v] = min(low[v], tin[to]);
-        } else {
-            dfs(to, v, adj);
-            low[v] = min(low[v], low[to]);
-            if (low[to] > tin[v])
-                res.push_back(vector<int>{to,v});
+    int timer;
+    vector<vector<int>> bridges;
+    void dfs(int node,int p,vector<vector<int>>& ar,vector<int>& vis,vector<int>& tin,vector<int>& low){
+        vis[node]=1;
+        tin[node]=low[node]=timer++;
+        
+        for(auto child: ar[node]){
+        if(child==p) continue;
+            if(vis[child]==1){
+                low[node]=min(low[node],tin[child]);
+            }
+            else{
+                dfs(child,node,ar,vis,tin,low);
+                low[node]=min(low[node],low[child]);
+                if(low[child]>tin[node])
+                    bridges.push_back(vector<int>{node,child});
+            }
         }
     }
-}
-
-
-vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
-    timer = 0;   
-    visited.assign(n, false);
-    tin.assign(n, -1);
-    low.assign(n, -1);
-         vector<vector<int>> adj(n);
-        for(auto c:connections){
-            adj[c[0]].push_back(c[1]);
-            adj[c[1]].push_back(c[0]);
+    vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
+        vector<int> vis(n,0);
+        vector<int> tin(n,-1);
+        vector<int> low(n,-1);
+        vector<vector<int>> ar(n);
+        timer=0;
+        for(auto& c:connections){
+            ar[c[0]].push_back(c[1]);
+            ar[c[1]].push_back(c[0]);
         }
-    for (int i = 0; i < n; ++i) {
-        if (!visited[i])
-            dfs(i,-1,adj);
-    }
-        return res;
+        
+        for(int i=0;i<n;i++){
+            if(vis[i]==0)
+                dfs(i,-1,ar,vis,tin,low);
+        }
+        return bridges;
     }
 };
