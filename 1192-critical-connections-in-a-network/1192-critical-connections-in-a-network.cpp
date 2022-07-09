@@ -16,7 +16,7 @@ void dfs(int v, int p, vector<vector<int>>& adj) {
             dfs(to, v, adj);
             low[v] = min(low[v], low[to]);
             if (low[to] > tin[v])
-                res.push_back({to,v});
+                res.push_back(vector<int>{to,v});
         }
     }
 }
