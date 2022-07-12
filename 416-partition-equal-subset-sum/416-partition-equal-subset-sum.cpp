@@ -23,6 +23,6 @@ public:
     }
     bool canPartition(vector<int>& nums) {
         int sum=accumulate(nums.begin(),nums.end(),0);
-        return sum%2==0?isSubset(nums,sum/2):0;
+        return sum%2==0?isSubset(nums,sum/2):false;
     }
 };
