@@ -1,23 +1,18 @@
 class Solution {
 public:
     int rob(vector<int>& nums) {
-     //two times house robber;
+        vector<int> nums1(nums.begin(),nums.end()-1);
+        vector<int> nums2(nums.begin()+1,nums.end());
         if(nums.size()==1)return nums[0];
-        
-        vector<int> numsA(nums.begin() + 1, nums.end());
-        vector<int> numsB(nums.begin(), nums.end()-1);
-        
-        return max(solve(numsA),solve(numsB));
+        return max(solve(nums1),solve(nums2));
     }
-    int solve(vector<int> &nums){
+    int solve(vector<int>&nums){
         vector<int> dp(nums);
-        int n=nums.size();
-            if(n==1)return nums[0];
-        dp[1]=max(nums[1],nums[0]);
-        
-        for(int i=2;i<n;i++){
+        if(nums.size()==1)return nums[0];
+        dp[1]=max(nums[0],nums[1]);
+        for(int i=2;i<nums.size();i++){
             dp[i]=max(nums[i]+dp[i-2],dp[i-1]);
         }
-        return dp[n-1];
+        return dp[nums.size()-1];
     }
 };
