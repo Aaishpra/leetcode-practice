@@ -1,9 +1,10 @@
 class Solution {
 public:
+   
     int findMaxForm(vector<string>& strs, int m, int n) {
         int t=strs.size();
-        vector<vector<vector<int>>> dp(t+1,vector<vector<int>>(m+1,vector<int>(n+1)));
-        
+         vector<vector<vector<int>>> dp(t+1,vector<vector<int>>(m+1,vector<int>(n+1)));
+            
         for(int i=1;i<t+1;i++){
             int cz=count(strs[i-1].begin(),strs[i-1].end(),'0');
             int co=strs[i-1].size()-cz;
