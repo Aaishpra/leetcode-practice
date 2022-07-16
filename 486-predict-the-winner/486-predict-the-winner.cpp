@@ -11,11 +11,8 @@ public:
     bool PredictTheWinner(vector<int>& nums) {
         memset(dp,-1,sizeof(dp));
         long long sum=accumulate(nums.begin(),nums.end(),0);
-        cout<<sum<<endl;
         long long one=solve(nums,0,nums.size()-1,0);
-        cout<<one<<endl;
         long long two=sum-one;
-        cout<<two<<endl;
         return one>=two;
     }
 };
