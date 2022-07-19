@@ -14,6 +14,9 @@ public:
             cur2=min(cur2+nums[i],nums[i]);
             best2=min(cur2,best2);
         }
+        //non circular= normal kadane max sum;
+        //circular sum= total - min kadane sum;
+        //then max sum returned of both 
         return total==best2?best1:max(best1,total-best2);
     }
 };
