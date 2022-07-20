@@ -1,31 +1,31 @@
 class Solution {
-bool canHarvest(vector<int>& bDay, int harvestDay, int m, int k) {
-    int adjacent = 0;
-    for (auto bloomDay : bDay) {
-        adjacent = bloomDay <= harvestDay ? adjacent + 1 : 0;
-        if (adjacent == k) {
-            adjacent = 0;
-            --m;
-        }
-    }
-    return m <= 0;
-}
 public:
-int minDays(vector<int>& bDay, int m, int k) {
-    int mx=INT_MIN;
-    for(int i:bDay){
-        mx=max(i,mx);
+    bool isValid(vector<int>& nums,int mid,int m,int k){
+        int wn=0;
+        for(int num:nums){
+            if(num<=mid) wn++;
+            else if(num>mid)wn=0;
+            if(wn==k){
+                m--;
+                wn=0;
+            }
+            if(m==0)return true;
+        }
+        return false;
     }
-    if (m * k > bDay.size())
-        return -1;
-    auto lo = 1, hi = mx;
-    while (lo < hi) {
-        auto mid = (hi + lo) / 2;
-        if (canHarvest(bDay, mid, m, k))
-            hi = mid;
-        else
-            lo = mid + 1;
+    int minDays(vector<int>& nums, int m, int k) {
+        if(m*k>nums.size()) return -1;
+        int lo=1;
+        int hi=*max_element(nums.begin(),nums.end());
+        int res=hi;
+        while(lo<=hi){
+            int mid=lo+(hi-lo)/2;
+            if(isValid(nums,mid,m,k)){
+                res=mid;
+                hi=mid-1;
+            }
+            else lo=mid+1;
+        }
+        return res;
     }
-    return lo;
-}
 };
