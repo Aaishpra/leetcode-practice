@@ -23,6 +23,6 @@ public:
     bool isBalanced(TreeNode* root) {
         if(root==NULL) return true;
         int temp=solve(root);
-        return temp!=-1;
+        return temp>-1;
     }
 };
