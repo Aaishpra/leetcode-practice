@@ -11,15 +11,18 @@
  */
 class Solution {
 public:
-    //Top down approach O(n^2)
-    int depth(TreeNode* root){
-        if(root==NULL) return 0;
-        return max(depth(root->left),depth(root->right))+1;
+    int solve(TreeNode* root){
+        if(!root) return 0;
+        int lh=solve(root->left);
+        int rh=solve(root->right);
+        if(lh==-1 or rh==-1 or abs(lh-rh)>1){
+            return -1;
+        }
+        return max(lh,rh)+1;
     }
     bool isBalanced(TreeNode* root) {
-        if(root == NULL) return true;
-        int lh=depth(root->left);
-        int rh=depth(root->right);
-        return (abs(lh-rh)<=1) and isBalanced(root->left) and isBalanced(root->right);
+        if(root==NULL) return true;
+        int temp=solve(root);
+        return temp!=-1;
     }
 };
