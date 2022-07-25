@@ -14,10 +14,6 @@ public:
         }
     }
     vector<vector<int>> combinationSum3(int k, int n) {
-        vector<int> nums;
-        for(int i=0;i<9;i++){
-            nums.push_back(i+1);
-        }
         vector<int> temp;
         solve(0,k,temp,n);
         return res;
