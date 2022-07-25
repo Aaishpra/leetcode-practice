@@ -1,15 +1,15 @@
 class Solution {
 public:
     vector<vector<int>> res;
-    void solve(int ind,int k,vector<int>& nums,vector<int> temp,int target){
+    void solve(int ind,int k,vector<int> temp,int target){
         if(temp.size()==k and target==0){
             res.push_back(temp);
             return;
         }
         
-        for(int i=ind;i<nums.size();i++){
-            temp.push_back(nums[i]);
-            solve(i+1,k,nums,temp,target-nums[i]);
+        for(int i=ind;i<9;i++){
+            temp.push_back(i+1);
+            solve(i+1,k,temp,target-i-1);
             temp.pop_back();
         }
     }
@@ -19,7 +19,7 @@ public:
             nums.push_back(i+1);
         }
         vector<int> temp;
-        solve(0,k,nums,temp,n);
+        solve(0,k,temp,n);
         return res;
     }
 };
