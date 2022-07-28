@@ -1,20 +1,21 @@
 class Solution {
 public:
     vector<vector<int>> res;
-    void solve(int pos,int n,vector<int>& curr){
+    
+    void backtrack(int pos,int n,vector<int>& nums){
         if(pos==n-1){
-            res.push_back(curr);
+            res.push_back(nums);
             return;
         }
         
         for(int i=pos;i<n;i++){
-            swap(curr[pos],curr[i]);
-            solve(pos+1,n,curr);
-            swap(curr[pos],curr[i]);
+            swap(nums[pos],nums[i]);
+            backtrack(pos+1,n,nums);
+            swap(nums[pos],nums[i]);
         }
     }
     vector<vector<int>> permute(vector<int>& nums) {
-        solve(0,nums.size(),nums);
+        backtrack(0,nums.size(),nums);
         return res;
     }
 };
