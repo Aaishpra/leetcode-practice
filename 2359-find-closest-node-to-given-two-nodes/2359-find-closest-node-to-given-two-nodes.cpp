@@ -1,37 +1,43 @@
 class Solution {
 public:
-   void dfs(vector<vector<int>> &ar, int node, vector<int> &dist,vector<int>& vis,int d)
-    {vis[node]=1;
-     dist[node]=d;
-       for(auto child:ar[node]){
-           if(vis[child]==0){
-               dfs(ar,child,dist,vis,dist[node]+1);
-           }
-       }
+    void bfs(vector<vector<int>> &ar,vector<int> &vis,vector<int> &dis,int node){
+        vis[node]=1;
+        queue<int> q;
+        q.push(node);
+        dis[node]=0;
+        while(!q.empty()){
+            int cur=q.front();
+            q.pop();
+            for(int child:ar[cur]){
+                if(vis[child]==0){
+                    q.push(child);
+                    vis[child]=1;
+                    dis[child]=dis[cur]+1;
+                }
+            }
+        }
     }
     int closestMeetingNode(vector<int>& edges, int node1, int node2) {
-     int n=edges.size();
+        int n=edges.size();
         vector<vector<int>> ar(n);
-        vector<int> vis1(n,0),vis2(n,0);
-          vector<int> dist1(n, INT_MAX), dist2(n, INT_MAX);
+        vector<int> vis(n,0),vis1(n,0);
+        vector<int> dis(n,INT_MAX),dis1(n,INT_MAX);
         for(int i=0;i<n;i++){
             if(edges[i]>-1){
-                ar[i].push_back(edges[i]);
+            ar[i].push_back(edges[i]);
             }
         }
-        dfs(ar,node1,dist1,vis1,0);
-        dfs(ar,node2,dist2,vis2,0);
-        int mx = INT_MAX, ans = -1;
-        for (int i = 0; i < n; i++)
-        {
-            if (mx > max(dist1[i], dist2[i]))
-            {
-                mx = max(dist1[i], dist2[i]);
-                ans = i;
-            }
+        
+        bfs(ar,vis,dis,node1);
+        bfs(ar,vis1,dis1,node2);
+        int mn=INT_MAX;
+        int cn=-1;
+        for(int i=0;i<n;i++){
+        if(mn>max(dis[i],dis1[i])){
+            mn=max(dis[i],dis1[i]);
+            cn=i;
+        }    
         }
-        return ans;
-        
-        
+        return cn;
     }
 };
