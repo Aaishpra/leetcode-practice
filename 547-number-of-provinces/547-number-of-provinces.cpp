@@ -1,5 +1,5 @@
 class UnionFind {
-  private:
+  public:
     vector < int > root;
     vector < int > rank;
   public:
@@ -60,19 +60,14 @@ class Solution {
         
       unordered_map < int, int > mp;
       
-      int count = 0;
+      int groups = 0;
       
-    for (int i = 0; i < n; i++) {
-        for (int j = i; j < n; j++) {
-          if (grid[i][j]==1) {
-            if (uf.find1(i) == uf.find1(j) and mp.find(uf.find1(i)) == mp.end()) {
-              count++;
-              mp[uf.find1(i)] = 1;
-            }
-          }
+    for(int i=0;i<n;i++) {
+            if(uf.root[i] == i)
+                groups++;
         }
-      }
-      return count;
+        
+        return groups;
     }
 
 };
