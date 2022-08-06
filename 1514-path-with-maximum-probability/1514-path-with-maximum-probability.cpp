@@ -1,34 +1,27 @@
 class Solution {
 public:
-    double maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start, int end) {
-          
-        vector<vector<pair<int, double>>> ar(n);
-        vector<double> prob(n, 0);
-        priority_queue<pair<double, int>> pq;
-        
-        for(int i = 0; i < edges.size(); i++) {
-            ar[edges[i][0]].push_back({edges[i][1], succProb[i]});
-            ar[edges[i][1]].push_back({edges[i][0], succProb[i]});   
+    double maxProbability(int n, vector<vector<int>>& e, vector<double>& succProb, int start, int end) {
+        vector<double> prob(n,0);
+        priority_queue<pair<double,int>> pq;
+        vector<vector<pair<int,double>>> ar(n);
+        for(int i=0;i<e.size();i++){
+            ar[e[i][0]].push_back({e[i][1],succProb[i]});
+            ar[e[i][1]].push_back({e[i][0],succProb[i]});
         }
-    
-        pq.push({1.0, start});
-        
-           // can't intiaize it with 0 as it we are using multiplication
-        prob[start] = 1;  
+        prob[start]=1;//cant take 0 because of multiplication
+        pq.push({1.0,start});
         
         while(!pq.empty()){
-            int node = pq.top().second;
-            double prevProbability = pq.top().first;
+            int cur=pq.top().second;
+            double cur_prob=pq.top().first;
             pq.pop();
-            
-            for(auto child : ar[node]){
-                if(prevProbability * child.second > prob[child.first]){
-                    prob[child.first] = prevProbability * child.second;
-                    pq.push(make_pair(prob[child.first], child.first));
+            for(auto child:ar[cur]){
+                if(cur_prob*child.second>prob[child.first]){
+                    prob[child.first]=cur_prob*child.second;
+                    pq.push({prob[child.first],child.first});
                 }
             }
         }
-        
         return prob[end];
     }
 };
