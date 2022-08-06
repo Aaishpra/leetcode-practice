@@ -18,7 +18,7 @@ public:
                 }
             }
         }
-        
+        //calculating the neigbhours of the node which have distance less than threshold
         int cnt=0;
         for(int i=0;i<n;i++){
             if(dist[i]<=dt){
@@ -28,7 +28,6 @@ public:
         return cnt;
     }
     int findTheCity(int n, vector<vector<int>>& edges, int dt) {
-      
         ar.resize(n);
         for(auto e:edges){
             ar[e[0]].push_back({e[1],e[2]});
@@ -37,6 +36,7 @@ public:
         
         int ans=-1,mn=INT_MAX;
         
+        //Finding the node which has minimum neigbhpurs
         for(int i=0;i<n;i++){
             int res=dijksatra(i,n,dt);
             if(res<=mn){
