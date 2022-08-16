@@ -1,12 +1,12 @@
 class Solution {
 public:
     int firstUniqChar(string s) {
-        unordered_map<char, int> m;
-        for(auto &c: s){
-            m[c]++;
+        unordered_map<char, int> mp;
+        for(char c: s){
+            mp[c]++;
         }
         for(int i=0; i<s.size(); i++){
-                if(m[s[i]]==1) return i;
+                if(mp[s[i]]<2) return i;
         
         }
         return -1;
