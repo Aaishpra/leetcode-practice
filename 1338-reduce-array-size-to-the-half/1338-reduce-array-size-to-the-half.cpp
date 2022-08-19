@@ -6,15 +6,15 @@ public:
         for(int i:arr){
             mp[i]++;
         }
-        priority_queue<pair<int,int>> pq;
+        priority_queue<int> pq;
         
         for(auto i:mp){
-            pq.push({i.second,i.first});
+            pq.push(i.second);
         }
         long long sum=0;
         int cnt=0;
         while(sum<n/2){
-            sum+=pq.top().first;
+            sum+=pq.top();
             pq.pop();
             cnt++;
         }
