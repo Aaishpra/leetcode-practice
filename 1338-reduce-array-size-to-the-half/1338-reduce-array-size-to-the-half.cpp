@@ -13,7 +13,7 @@ public:
         }
         long long sum=0;
         int cnt=0;
-        while(sum<n/2){
+        while(sum<(n>>1)){
             sum+=pq.top();
             pq.pop();
             cnt++;
