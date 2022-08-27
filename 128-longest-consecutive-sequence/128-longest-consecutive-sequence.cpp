@@ -1,22 +1,19 @@
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
-     unordered_set<int> hashset;
-        for(int num:nums){
-            hashset.insert(num);
-        }
-        int mx=0;
-        for(int num:nums){
-            if(hashset.find(num-1)==hashset.end()){
-                int curr=num;
-                int currs=1;
-                while(hashset.find(curr+1)!=hashset.end()){
-                    curr+=1;
-                    currs+=1;
-                }
-            
-            mx=max(currs,mx);
-        }
+        sort(nums.begin(),nums.end());
+        int len=1,mx=1;
+       // for(int n:nums) cout<<n<<" ";
+        if(nums.size()==0)return 0;
+        for(int i=1;i<nums.size();i++){
+            if(nums[i]-1==nums[i-1]){
+                len++;
+            }
+            else if(nums[i]!=nums[i-1]){
+                mx=max(len,mx);
+                len=1;
+            }
+            mx=max(len,mx);
         }
         return mx;
     }
