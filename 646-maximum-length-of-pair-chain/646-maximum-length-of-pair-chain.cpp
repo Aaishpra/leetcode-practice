@@ -1,24 +1,18 @@
- bool cmp(vector<int> a, vector<int> b) {
-    if(a[1] < b[1]) {
-        return true;
-    }
-    return false;
-}  
 class Solution {
 public:
-
-int findLongestChain(vector<vector<int>>& pairs) {
-    
-        int n=pairs.size();
-        sort(pairs.begin(), pairs.end(), cmp);
-        int cur=pairs[0][1];
-        int len=1;
-        for(int i=1;i<n;i++){
-            if(cur<pairs[i][0]){
-                cur=pairs[i][1];
-                len++;
+    static bool mysort(vector<int> &a,vector<int>& b){
+        return a[0]==b[0]?a[1]<b[1]:a[0]<b[0];
+    }
+    int findLongestChain(vector<vector<int>>& pairs) {
+        sort(pairs.begin(),pairs.end(), mysort);
+        vector<int> dp(pairs.size(),1);
+        for(int i=0;i<pairs.size();i++){
+            for(int j=0;j<i;j++){
+                if(pairs[i][0]>pairs[j][1]){
+                    dp[i]=max(dp[i],dp[j]+1);
+                }
             }
         }
-        return len;
+        return *max_element(dp.begin(),dp.end());
     }
 };
