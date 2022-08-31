@@ -1,52 +1,40 @@
 class Solution {
 public:
-    int LongestBitonicSequence(vector<int>arr){
-    int n = arr.size();
-    int lis[n];
-    int lds[n];
-    lis[0] = 1;
-    for(int i=1;i<n;i++){
-        int mx = 0;
-        for(int j=0; j<i;j++){
-            if(arr[j] < arr[i]){
-                if(mx < lis[j]){
-                    mx = lis[j];
+    vector<int> LIS(vector<int> &nums){
+        vector<int> dp(nums.size(),1);
+        for(int i=0;i<nums.size();i++){
+            for(int j=0;j<i;j++){
+                if(nums[i]>nums[j]){
+                    dp[i]=max(dp[i],dp[j]+1);
                 }
             }
         }
-        lis[i] = mx+1;
+        return dp;
     }
-    lds[n-1] = 1;
-    for(int i=n-2;i>=0;i--){
-        int mx = 0;
-        for(int j=n-1;j>i; j--){
-            if(arr[j] < arr[i]){
-                if(mx < lds[j]){
-                    mx = lds[j];
+     vector<int> LDS(vector<int> &nums){
+        vector<int> dp(nums.size(),1);
+        for(int i=nums.size()-1;i>=0;i--){
+            for(int j=nums.size()-1;j>i;j--){
+                if(nums[i]>nums[j]){
+                    dp[i]=max(dp[i],dp[j]+1);
                 }
             }
         }
-        lds[i] = mx+1;
+        return dp;
     }
-    
-    for(int i=0;i<n;i++){
-        cout<<lis[i]<<" ";
-    }cout<<endl;
-    for(int i=0;i<n;i++){
-        cout<<lds[i]<<" ";
-    }cout<<endl;
-    
-    
-    
-    int max =0;
-   for (int i = 1; i < n; i++)
-     if (lis[i] + lds[i] - 1 > max)
-         if(lis[i]>1 and lds[i]>1){
-            max = lis[i] + lds[i] - 1;
-         }
-    return max;
-}
-int minimumMountainRemovals(vector<int>& nums) {
-    return nums.size()-LongestBitonicSequence(nums);
-}
+    int minimumMountainRemovals(vector<int>& nums) {
+        
+        vector<int> inc=LIS(nums);
+        vector<int> dec=LDS(nums);
+        int ans=-1;
+        for(int i=0;i<nums.size();i++){
+            if(inc[i]==1 or dec[i]==1){
+                continue;
+            }
+            else {
+                ans=max(ans,inc[i]+dec[i]-1);
+            }
+        }
+        return nums.size()-ans;
+    }
 };
