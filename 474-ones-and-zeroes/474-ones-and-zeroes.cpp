@@ -1,25 +1,20 @@
 class Solution {
 public:
-    int dp[601][101][101];
     int findMaxForm(vector<string>& strs, int m, int n) {
-        memset(dp,-1,sizeof(dp));
-        
-       return solve(0,m,n,strs.size(),strs);
-    }
-    int solve(int start,int m,int n,int size,vector<string>&strs){
-        if(start>=size || m<0 || n<0)
-            return 0;
-        if(m==0 && n==0)
-            return 0;
-        if(dp[start][m][n]!=-1)
-            return dp[start][m][n];
-        
-        int i=start;
-        int zeroes=count(strs[i].begin(),strs[i].end(),'0');
-        int ones=strs[i].size()-zeroes;
-        if(m>=zeroes && n>=ones)
-            return dp[start][m][n]=max(1+solve(i+1,m-zeroes,n-ones,size,strs),solve(i+1,m,n,size,strs));
-        else
-            return dp[start][m][n]=solve(i+1,m,n,size,strs);
+        vector<vector<vector<int>>> dp(strs.size()+1,vector<vector<int>>(m+1,vector<int>(n+1)));
+       
+        for(int i=1;i<strs.size()+1;i++){
+            int ones=count(strs[i-1].begin(),strs[i-1].end(),'1');
+            int zeros=strs[i-1].size()-ones;
+            for(int j=0;j<=m;j++){
+                for(int k=0;k<=n;k++){
+                    if(j-zeros>=0 and k-ones>=0){
+                        dp[i][j][k]=max(1+dp[i-1][j-zeros][k-ones],dp[i-1][j][k]);
+                    }
+                    else dp[i][j][k]=dp[i-1][j][k];
+                }
+            }
+        }
+        return dp[strs.size()][m][n];
     }
 };
