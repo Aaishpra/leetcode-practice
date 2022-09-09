@@ -11,13 +11,11 @@ public:
         int n=nums.size();
         int mx=nums[n-1][1];
         for(int i=n-1;i>=0;i--){
-            cnt+=(nums[i][1]<mx);
+            if(nums[i][1]<mx){
+                cnt++;
+            }
             mx=max(mx,nums[i][1]);
         }
-        
         return cnt;
     }
-    
- 
-    
 };
