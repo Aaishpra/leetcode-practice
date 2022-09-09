@@ -11,9 +11,7 @@ public:
         int n=nums.size();
         int mx=nums[n-1][1];
         for(int i=n-1;i>=0;i--){
-            if(nums[i][1]<mx){
-                cnt++;
-            }
+            cnt+=(nums[i][1]<mx);
             mx=max(mx,nums[i][1]);
         }
         return cnt;
