@@ -34,9 +34,10 @@ public:
             ar[e[1]].push_back({e[0],e[2]});
         }
         
+        
         int ans=-1,mn=INT_MAX;
         
-        //Finding the node which has minimum neigbhpurs
+        //Finding the node which has minimum neigbhours
         for(int i=0;i<n;i++){
             int res=dijksatra(i,n,dt);
             if(res<=mn){
