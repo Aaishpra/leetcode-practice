@@ -7,7 +7,7 @@ public:
     
     int next(int price) {
          int res = 1;
-        while (!s.empty() && s.top().first <= price) {
+        while(!s.empty() && price>=s.top().first) {
             res += s.top().second;
             s.pop();
         }
