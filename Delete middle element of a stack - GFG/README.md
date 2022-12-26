@@ -1,7 +1,6 @@
 # Delete middle element of a stack
-## Easy 
-<div class="problem-statement">
-                <p></p><p><span style="font-size:18px">Given a stack with<strong> push(), pop(), empty() </strong>operations, delete the&nbsp;<strong>middle </strong>of the stack&nbsp;without using any additional data structure.<br>
+## Easy
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a stack with<strong> push(), pop(), empty() </strong>operations, delete the&nbsp;<strong>middle </strong>of the stack&nbsp;without using any additional data structure.<br>
 <strong>Middle: </strong>ceil((size_of_stack+1)/2) (1-based index)</span><br>
 &nbsp;</p>
 
@@ -41,5 +40,4 @@ element which is deleted</span></pre>
 <p><br>
 <span style="font-size:18px"><strong>Constraints:</strong><br>
 2 ≤ size of stack&nbsp;≤ 100</span></p>
- <p></p>
-            </div>
+</div>
