@@ -1,7 +1,6 @@
 # Permutation with Spaces
-## Easy 
-<div class="problem-statement">
-                <p></p><p><span style="font-size:18px">Given a string you need to print all possible strings that can be made by placing spaces (zero or one) in between them. The output should be printed in <strong>sorted</strong> <strong>increasing</strong> order of strings</span></p>
+## Easy
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a string you need to print all possible strings that can be made by placing spaces (zero or one) in between them. The output should be printed in <strong>sorted</strong> <strong>increasing</strong> order of strings</span></p>
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
@@ -34,7 +33,6 @@ You don't need to read input or print anything. Your task is to complete the fun
 <p>&nbsp;</p>
 
 <p><span style="font-size:18px"><strong>CONSTRAINTS:</strong><br>
-1 &lt; |S| &lt; 10<br>
+1 &lt;= |S| &lt; 10<br>
 S only contains <strong>lowercase and Uppercase English</strong> letters.</span></p>
- <p></p>
-            </div>
+</div>
