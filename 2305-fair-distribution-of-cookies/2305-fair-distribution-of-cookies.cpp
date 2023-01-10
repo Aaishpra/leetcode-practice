@@ -1,7 +1,7 @@
 class Solution {
 public:
       bool isValid(vector<int> &nums,int m,long mx){
-        int count=0;
+        int count=1;
         int sum=0;
         for(int i=0;i<nums.size();i++){
             sum+=nums[i];
@@ -9,7 +9,7 @@ public:
             count++;
             sum=nums[i];}
         }
-        return count<m;
+        return count<=m;
     }
     int splitArray(vector<int>& nums, int m) {
         int n=nums.size();
