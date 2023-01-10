@@ -1,24 +1,27 @@
 class Solution {
 public:
-    bool isValid(vector<int> &nums,int n, int mid){
-        int curh=0;
-        for(int i:nums){
-            curh+=i/mid;
-            if(i%mid!=0)curh++;
+    bool isValid(vector<int> q,int mid,int n){
+        int cnt=0;
+        for(int x:q){
+            if(x%mid==0){
+                cnt+=x/mid;
+            }
+            else cnt+=x/mid+1;
         }
-        return curh<=n;
+        return cnt<=n;
     }
-    int minimizedMaximum(int n, vector<int>& nums) {
-        int lo=1, hi=*max_element(nums.begin(),nums.end());
-        int ans = 0;
+    int minimizedMaximum(int n, vector<int>& q) {
+        int lo=1,hi=*max_element(q.begin(),q.end());
+        
+        int res=-1;
         while(lo<=hi){
             int mid=lo+(hi-lo)/2;
-            if(isValid(nums,n,mid)){
-                ans=mid;
+            if(isValid(q,mid,n)){
+                res=mid;
                 hi=mid-1;
             }
             else lo=mid+1;
         }
-        return ans;
+        return res;
     }
 };
